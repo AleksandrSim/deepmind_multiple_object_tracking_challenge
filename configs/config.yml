@@ -1,0 +1,45 @@
+COMMON_PREFIX: "/Users/aleksandrsimonyan/Desktop/deepmind_updated/"
+
+arguments:
+  logger_path: 
+
+  AFLINK: false
+  BoT: true
+  ECC: false
+  EMA: true
+  EMA_alpha: 0.9
+  GSI: false
+  MC: false
+  MC_lambda: 0.98
+  NSA: true
+  dir_save: null
+  display: true
+  max_age: 1500
+  max_cosine_distance: 15
+  max_iou_distance: 0.9
+  min_confidence: 1.0e-05
+  min_detection_height: 0
+  n_init: 10
+  nms_max_overlap: 0.9
+  nn_budget: 20
+  path_AFLink: data/ext_models/AFLink_epoch20.pth
+  root_dataset: data/preds
+  video_directory: data/videos/train/
+  woC: true
+  device: 'cuda:0'
+dataset_options:
+  sequences:
+    train: 
+     [video_1_sequence_dir]
+#main_dir_path: /Users/aleksandrsimonyan/Desktop/test/video_1_sequence_dir/
+prepare_files:
+  config_file: data/ext_models/bagtricks_S50.yml
+  debug_yolo: false
+  features_model_weights: data/ext_models/DukeMTMC_BoT-S50.pth
+  iou_thresh: 0.9
+  out_logs_path: /Users/aleksandrsimonyan/Desktop/yolo_weights/predictions/fast_reid/logs
+  sequence_folder: data/preds
+  specific_videos:
+  training_json: data/annot/object_tracking_valid_subset.json
+  video_path: data/videos/train
+  yolo_model_path: data/ext_models/YOLOXl-009_003-019-0.839273.pth

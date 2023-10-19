@@ -1,0 +1,49 @@
+---
+metadata:
+  experiment_name: YOLOX
+  run_name: train_010_05a
+  description: Train YOLOX-m with frozen encoder, final stage with aug
+  experimenter: Nikolay
+model:
+  _target_: src.detect.yolox.metamodel.YOLOXMetaModel
+  params:
+    device: cuda:0
+    nn_module:
+      num_classes: 0
+      in_channels: [256, 512, 1024]
+      depth: 0.67  # s: 0.33, m: 0.67, l: 1.0, x: 1.33
+      width: 0.75  # s: 0.50, m: 0.75, l: 1.0,  x: 1.25
+      act: 'silu'
+      use_l1: false
+      freeze_encoder: true
+    loss:
+      device: ${model.params.device}
+      use_l1: false  # If set, nn_module.use_l1 should be true
+    optimizer:
+      lr: 0.0001
+    amp: False
+    pretrain: /workdir/data/experiments/YOLOX_train_010_05/model-003-0.816770.pth  #/workdir/data/yolox_pretrain/yolox_m.pth
+    pretrain_convert: false # Set to true to convert the model from YOLOX repo
+train_params:
+  max_epochs: 100
+  early_stopping_epochs: 50
+  reduce_lr_factor: 0.5
+  reduce_lr_patience: 8
+  monitor_metric: val_iou
+  monitor_metric_better: max
+  use_compile: false  # Use torch compile to speed up the model
+data_params:
+  input_size: [640, 640]
+  batch_size: 64
+  num_workers: 8
+  pin_memory: true
+  fill_value: 127  # Value to pad the images to square
+  max_labels: 128  # Maximum number of bboxes per image
+  train:
+    annot_file: /workdir/data/annot/converted_train.json
+    img_dir: /workdir/data/datasets/train/
+    range: [0.0, 1.0]  # This is for debug only, normal range is [0.0, 1.0]
+  val:
+    annot_file: /workdir/data/annot/converted_valid.json
+    img_dir: /workdir/data/datasets/valid/
+    range: [0.0, 0.4]

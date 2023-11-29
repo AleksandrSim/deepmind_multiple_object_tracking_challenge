@@ -6,8 +6,6 @@ import sys
 # Related third-party imports
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from mpl_toolkits.mplot3d import Axes3D
-import plotly.graph_objects as go
 import tkinter as tk
 from tkinter import ttk
 import webbrowser

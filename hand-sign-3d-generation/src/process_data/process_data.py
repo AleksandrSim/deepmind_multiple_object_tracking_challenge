@@ -1,19 +1,6 @@
-import json
-import os
-
-import bpy
-import numpy as np
-import json
-import os
-
 # Third-party imports
 import bpy
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
-from mpl_toolkits.mplot3d import Axes3D
-import numpy as np
-import plotly.express as px
 import plotly.graph_objects as go
 
 # Local application/library specific imports

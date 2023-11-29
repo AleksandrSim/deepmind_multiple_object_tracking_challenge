@@ -3,7 +3,6 @@ import bpy
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 
-# Local application/library specific imports
 from .utils import HAND_BONES, HAND_BONES_CONNECTIONS
 
 
